@@ -33,12 +33,12 @@ module add bedops-2.4.39
 REF="/auto/pruhonice1-ibot/shared/brassicaceae/ref/cardamine/pseudohap_Camara_90M_10kb.fasta"
 
 
-parallel -j 4 --plus "echo {}; java -jar $GATK/GenomeAnalysisTK.jar -T VariantsToTable \
+parallel -j 16 --plus "echo {}; java -jar $GATK/GenomeAnalysisTK.jar -T VariantsToTable \
 	-R $REF --showFiltered -log {..}.vartable.log \
 	-V {} -AMD \
 	-o vartable.{..}.tsv \
 	-F CHROM -F POS -F QUAL -F QD -F DP -F MQ -F MQRankSum -F ReadPosRankSum -F FS -F HET -F SOR -F FILTER \
-	-GF DP &>/dev/null" ::: $(ls -S *vcf.gz) 
+	-GF DP" ::: $(ls -S *vcf.gz) 
 ```
 
 #### 2) merge all vartables
