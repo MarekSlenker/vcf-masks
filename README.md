@@ -396,7 +396,12 @@ toBlacklist = fixhet[fixhet$percentages > 3, ]
 write.table(toBlacklist, "toBlacklist_genes_3%fixedHetSitesPerGene.txt",quote=F,row.names=F)
 ```
 
-List of genes to blacklist is in 'toBlacklist_genes_3%fixedHetSitesPerGene.txt' file. Quit the `R` session and finish the mask in `BASH`.
+List of genes to blacklist is in 'toBlacklist_genes_3%fixedHetSitesPerGene.txt' file.  
+Quit the `R` session
+```r
+q()
+```
+and finish the mask in `BASH`.
 
 
 ```sh
