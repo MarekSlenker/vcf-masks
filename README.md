@@ -162,7 +162,7 @@ I used SnpEff	4.3t	2017-11-24, aniable [here](https://sourceforge.net/projects/s
 module add jdk-8
 module add parallel-20160622
 
-parallel -j 10 "echo {/}; java -Xmx16g -jar snpEff/SnpSift.jar extractFields {} "CHROM" "POS" "GEN[*].GT" > {}.ann.tab.txt" ::: $(ls -S ./*vcf.gz)
+parallel -j 16 "echo {/}; java -Xmx16g -jar snpEff/SnpSift.jar extractFields {} "CHROM" "POS" "GEN[*].GT" > {}.ann.tab.txt" ::: $(ls -S ./*vcf.gz)
 
 grep --no-filename -v "CHROM" *ann.tab.txt > ann.tab.forHetMask.txt
 ```
