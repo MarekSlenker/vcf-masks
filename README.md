@@ -3,10 +3,11 @@
 ### Table of Contents  
 
 
-[# Excessive Depth Mask](https://github.com/MarekSlenker/vcf-mask/edit/main/README.md#fixed-heterozygosity-mask)
+[# Excessive Depth Mask](https://github.com/MarekSlenker/vcf-mask#excessive-depth-mask)
 
 
-[# Fixed Heterozygosity Mask](https://github.com/MarekSlenker/vcf-mask/edit/main/README.md#fixed-heterozygosity-mask)
+[# Fixed Heterozygosity Mask](https://github.com/MarekSlenker/vcf-mask#fixed-heterozygosity-mask)
+
 
 
 
