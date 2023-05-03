@@ -156,7 +156,7 @@ the `excess_depth_possitions.${N}_indiv.GATK.sites` and `excess_depth_possitions
 ### 1. Extract genotype fields
 
 Download and installing SnpEff, follow instuctions on [SnpEff download page](https://pcingola.github.io/SnpEff/download/). 
-I used SnpEff	4.3t	2017-11-24, aniable [here](https://sourceforge.net/projects/snpeff/files/snpEff_v4_3t_core.zip/download)
+I used SnpEff	4.3t	2017-11-24, available [here](https://sourceforge.net/projects/snpeff/files/snpEff_v4_3t_core.zip/download)
 
 ```sh
 module add jdk-8
