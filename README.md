@@ -241,7 +241,7 @@ write.table(a_SNPS,"a_SNPS.txt",quote=F,row.names=F)
 ```
 
   
-As stated above, we decided to blacklist any gene (exon+intron) with more than X% fixed heterozygous SNPs in the **exon** in any of the diploid populations. To do this, we need to know boundaries of exons (we will get it from `pseudohap_Camara_90M_10kb.exons.gff` file), and how many SNPs occures in each exon. You can easily edit this code to work with whole genes, if desired.
+As stated above, we decided to blacklist any gene (exon+intron) with more than X% fixed heterozygous SNPs in the **exon** in any of the diploid populations. To do this, we need to know boundaries of exons (we will get it from `pseudohap_Camara_90M_10kb.exons.gff` file), and how many SNPs occures in each exon. You can easily edit this code to work with whole genes, if desired. If gene is composed of multiple (overlapping) transcript, those transcripts are merged at first.
 
 ```r
 exons = read.table(EXONS)
