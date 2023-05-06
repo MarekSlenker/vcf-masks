@@ -344,7 +344,7 @@ write.table(fixhetpersite,"fixedHetPerSite.txt",quote=F,row.names=F)
 `fixhetpersite` contains SNP positions with fixed heterozygosity within at least one population. To restrict sites to those present in at least 2 populations, subset `fixhetpersite` as in the next block of code.
 
 ```R
-fixhetpersite = subset(fixhetpersite,fixhetpersite$fixhet > 1)
+fixhetpersite = subset(poptable,poptable$fixhet>1)
 write.table(fixhetpersite,"fixedHetPerSite.txt", quote=F, row.names=F)
 ```
 
