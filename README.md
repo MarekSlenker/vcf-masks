@@ -250,6 +250,35 @@ exonsOfGenesBoundaries = cbind(exons$V1, exons$V4, exons$V5,  gsub("Parent=", ""
 colnames(exonsOfGenesBoundaries) = c("CHROM", "exonBegin", "exonEnd", "GEN")
 exonsOfGenesBoundaries = as.data.frame(exonsOfGenesBoundaries)
 
+# if gene contains more transcripts, merge overlapping ones
+revisedExonsOfGenesBoundaries=NULL
+for (e in unique(exonsOfGenesBoundaries$GEN)){  # split chromosoms to make it faster
+	gene = exonsOfGenesBoundaries[exonsOfGenesBoundaries$GEN == e,]
+	gene  = gene[order(gene$exonBegin),]
+	index = 1
+	for (i in 1:nrow(gene)){
+		if (gene$exonEnd[index] >= gene$exonBegin[i]){
+			gene$exonEnd[index] = max(gene$exonEnd[index],gene$exonEnd[i])
+		} else {
+			index = index+1
+			gene[index,] = gene[i,]
+		}
+	}
+	if (nrow(gene) > index){
+		cat("gene_id", e, " was merged to not-overlapping contigs\n") 
+		revisedExonsOfGenesBoundaries = rbind(revisedExonsOfGenesBoundaries, gene[1:index,])
+		write.table(revisedExonsOfGenesBoundaries, file = "revisedExonsOfGenesBoundaries.txt", append = T, quote = F, row.names = F, col.names = F)
+		revisedExonsOfGenesBoundaries=NULL
+	} else {
+		revisedExonsOfGenesBoundaries = rbind(revisedExonsOfGenesBoundaries, gene)
+	}
+}
+if (! is.null(revisedExonsOfGenesBoundaries)){
+	write.table(revisedExonsOfGenesBoundaries, file = "revisedExonsOfGenesBoundaries.txt", append = T, quote = F, row.names = F, col.names = F)
+	revisedExonsOfGenesBoundaries=NULL
+}
+exonsOfGenesBoundaries = read.delim("revisedExonsOfGenesBoundaries.txt", header=F, sep = "")
+
 
 # calculate lengths of exons
 exonsOfGenesBoundaries$length = as.numeric(exonsOfGenesBoundaries$exonEnd) - as.numeric(exonsOfGenesBoundaries$exonBegin) + 1 
@@ -258,17 +287,17 @@ exonsOfGenesBoundaries$snpsInExon=NA
 # calculate number of SNPs within each exon
 for (ch in unique(exonsOfGenesBoundaries$CHROM)){  # split chromosoms to make it faster
 	cat(ch, "\n")
-	eval(parse(text=paste("exonsOfGenesBoundaries_", ch, "=exonsOfGenesBoundaries[exonsOfGenesBoundaries$CHROM==", ch,", ]", sep="")))
+	eval(parse(text=paste("exonsOfGenesBoundaries_", ch, "=exonsOfGenesBoundaries[exonsOfGenesBoundaries$CHROM==\"", ch,"\", ]", sep="")))
 	# check, if there is any SNP
-	eval(parse(text=paste("SNPsCount", "= nrow(a_SNPS[a_SNPS$CHROM==", ch,", ])", sep="")))
+	eval(parse(text=paste("SNPsCount", "= nrow(a_SNPS[a_SNPS$CHROM==\"", ch,"\", ])", sep="")))
 	
 	if (SNPsCount > 0) { # yeap, SNP is there
-		eval(parse(text=paste("chrom_", ch, "=a_SNPS[a_SNPS$CHROM==", ch,", ]", sep="")))
+		eval(parse(text=paste("chrom_", ch, "=a_SNPS[a_SNPS$CHROM==\"", ch,"\", ]", sep="")))
 		eval(parse(text=paste("snpsInExon = apply(exonsOfGenesBoundaries_", ch, ",1,function(x) sum(chrom_", ch, "$POS %in% as.numeric(x[2]):as.numeric(x[3])))", sep="")))
 	} else {
 		eval(parse(text=paste("snpsInExon = rep(0, length(exonsOfGenesBoundaries_", ch, "$GEN))", sep="")))
 	}
-	eval(parse(text=paste("exonsOfGenesBoundaries$snpsInExon[exonsOfGenesBoundaries$CHROM == ", ch,"] = snpsInExon", sep="")))  # push results directly to exonsOfGenesBoundaries$snpsInExon 
+	eval(parse(text=paste("exonsOfGenesBoundaries$snpsInExon[exonsOfGenesBoundaries$CHROM == \"", ch,"\"] = snpsInExon", sep="")))  # push results directly to exonsOfGenesBoundaries$snpsInExon 
 }
 write.table(exonsOfGenesBoundaries, "exonsOfGenesBoundaries_snpsInExon.txt", quote=F,row.names=F)
 ```
