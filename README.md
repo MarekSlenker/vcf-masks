@@ -1,4 +1,4 @@
-# vcf-mask
+# vcf-masks
 
 ### Table of Contents  
 
