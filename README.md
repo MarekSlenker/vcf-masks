@@ -278,6 +278,7 @@ if (! is.null(revisedExonsOfGenesBoundaries)){
 	revisedExonsOfGenesBoundaries=NULL
 }
 exonsOfGenesBoundaries = read.delim("revisedExonsOfGenesBoundaries.txt", header=F, sep = "")
+colnames(exonsOfGenesBoundaries) = c("CHROM", "exonBegin", "exonEnd", "GEN")
 
 
 # calculate lengths of exons
