@@ -1,5 +1,8 @@
 # vcf-masks
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11975438.svg)](https://doi.org/10.5281/zenodo.11975438)  
+
+
 ### Table of Contents  
 
 
@@ -445,6 +448,16 @@ sed -i 's/\([0-9]*\)[a-zA-Z \t]*\([0-9]*\)\t\([0-9]*\).*/\1 \2 \3/' cardamine.fi
 sed 's/ /:/' cardamine.fixedHetMask.genesWith3%fixedHetSites.bed | sed 's/ /-/' > cardamine.fixedHetMask.genesWith3%fixedHetSites.GATK.intervals
 ```
 
+
+
+
+
+
+&nbsp;  
+### How to cite
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11975438.svg)](https://doi.org/10.5281/zenodo.11975438)  
+**Šlenker, M. 2024.** vcf-masks. Zenodo. https://doi.org/10.5281/zenodo.11975438
 
 
 
