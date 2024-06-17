@@ -457,7 +457,7 @@ sed 's/ /:/' cardamine.fixedHetMask.genesWith3%fixedHetSites.bed | sed 's/ /-/' 
 ### How to cite
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11975438.svg)](https://doi.org/10.5281/zenodo.11975438)  
-**Šlenker, M. 2024.** vcf-masks. Zenodo. https://doi.org/10.5281/zenodo.11975438
+**Šlenker, M. 2022.** vcf-masks. Zenodo. https://doi.org/10.5281/zenodo.11975438
 
 
 
